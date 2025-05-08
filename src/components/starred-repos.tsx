@@ -116,7 +116,7 @@ export function StarredRepos() {
                         Ver repositório
                       </a>
                     </Button>
-                    {
+                    {/* {
                       repo.topics.includes('api') ? (
                         <Button variant="ghost" size="sm">
                           <SquareArrowOutUpLeft className="h-4 w-4" />
@@ -128,7 +128,7 @@ export function StarredRepos() {
                           Ver página
                         </Button>
                       ) : <></>
-                    }
+                    } */}
                   </div>
                 </div>
               </CardContent>
