@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Github, Linkedin, Twitter, Mail, Instagram, ExternalLink } from 'lucide-vue-next'
 
 const socialLinks = [
@@ -36,25 +37,42 @@ const projects = [
     name: 'Lumi',
     description: 'Projeto pessoal para facilitar o processo de posts carousel no Instagram For Business/Creator (Meta API, ChatGPT, AWS S3, GD Image).',
     url: 'https://lumi-xi.vercel.app/',
+    image: lumiImage,
     technologies: ['VueJS', 'TailwindCSS', 'PHP', 'Laravel', 'PostgreSQL'],
   },
   {
     name: 'SPA Intentions',
     description: 'Plataforma para facilidade de registro de intenções dos fiéis para os horários de missa, para a minha paróquia.',
     url: 'https://github.com/MatheusMottaGit/spa-intentions',
+    image: spaImage,
     technologies: ['PHP', 'Laravel', 'PostgreSQL', 'VueJS', 'Docker'],
   },
 ]
 
 import premioAbevdImage from '@/assets/Attached_image.png'
+import dashboardCorridasImage from '@/assets/Attached_image2.png'
+import lumiImage from '@/assets/Attached_image3.png'
+import spaImage from '@/assets/Attached_image4.png'
 
 const professionalProjects = [
   {
     name: 'Prêmio ABEVD - 2025',
-    description: 'Aplicação de premiação por empresas de projetos sociais. Desenvolvi o backend (API) da aplicação em desenvolvimento colaborativo.',
+    description: 'ABEVD é uma organização sem fins lucrativos, com o objetivo de promover o crescimento de vendas diretas no Brasil. Para a aplicação de uma premiação por parte de empresas em projetos, desenvolvi o Backend da aplicação.',
+    features: [
+      'Cadastro de projetos e suas notas',
+      'Processos de avaliação de projetos (únicos ou múltiplos) por jurados',
+      'Notificações por e-mail (registro de usuário, troca de senhas)',
+    ],
     url: 'https://premio-abevd.vercel.app',
     image: premioAbevdImage,
     technologies: ['PHP', 'Laravel', 'MySQL', 'Mailtrap'],
+  },
+  {
+    name: 'Move Já!',
+    description: 'Sistema de gestão e monitoramento de corridas com dashboard completo. Desenvolvi a interface da aplicação incluindo fluxo de autenticação "Role Based", gerenciamento de motoristas e passageiros, tarifas, notificações, corridas e relatórios de viagem.',
+    url: 'https://move-ja-painel.vercel.app',
+    image: dashboardCorridasImage,
+    technologies: ['ReactJS', 'TailwindCSS', 'TypeScript', 'Tanstack Query'],
   },
 ]
 </script>
@@ -91,27 +109,25 @@ const professionalProjects = [
           Desenvolvedor Full-Stack
         </h1>
         <h2 class="text-lg xs:text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold wrap-break-word">
-          <span class="bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-400 bg-clip-text text-transparent"> Matheus</span>
-          <span class="bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-400 bg-clip-text text-transparent"> Motta</span>
+          <span class="bg-linear-to-r from-blue-500 via-purple-500 to-cyan-400 bg-clip-text text-transparent"> Matheus</span>
+          <span class="bg-linear-to-r from-blue-500 via-purple-500 to-cyan-400 bg-clip-text text-transparent"> Motta</span>
         </h2>
       </div>
 
       <!-- Language Badges -->
-      <div class="flex flex-wrap items-center justify-center gap-2 sm:gap-3 px-4 sm:px-6 mt-4 sm:mt-6">
+      <div class="flex flex-wrap items-center justify-center gap-2 px-4 sm:px-6 mt-4 w-96">
         <Badge
-          v-for="language in ['php', 'laravel', 'nodejs', 'sql', 'postgresql', 'vuejs', 'docker', 'aws']"
+          v-for="language in ['php', 'laravel', 'nodejs', 'sql', 'postgresql', 'mysql', 'vuejs', 'docker', 'aws']"
           :key="language"
-          variant="outline"
-          class="text-xs sm:text-sm font-mono text-white/90 bg-white/5 border-white/20 hover:bg-white/10 hover:border-white/30"
         >
           {{ language }}
         </Badge>
       </div>
 
       <!-- Description Section -->
-      <div class="w-full max-w-2xl px-4 sm:px-6 md:px-8 mt-4 sm:mt-6">
+      <div class="w-full max-w-2xl px-4 sm:px-6 md:px-8 mt-4">
         <p class="text-sm xs:text-base sm:text-base md:text-lg text-white/80 leading-relaxed text-center">
-          Desenvolvedor Full-Stack com mais de 3 anos de experiência. Gosto de pensar em problemas reais para tentar resolver. Tenho o hábito de investigar e descobrir o funcionamento das ferramentas que uso, sempre buscando entender como tudo funciona. Acredito que aprender e continuar evoluindo é fundamental para crescer como profissional.
+          Desenvolvedor Full-Stack com mais de 3 anos de experiência. Gosto de pensar em problemas reais para resolver. Tenho o hábito de investigar e descobrir o funcionamento das ferramentas que uso, sempre buscando entender como tudo funciona. Acredito que aprender e continuar evoluindo é fundamental para crescer como profissional.
         </p>
       </div>
 
@@ -121,13 +137,12 @@ const professionalProjects = [
           Projetos profissionais
         </h3>
         <div class="space-y-4 sm:space-y-6">
-          <div
+          <Card
             v-for="project in professionalProjects"
             :key="project.name"
-            class="block p-4 sm:p-5 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 hover:border-white/20 transition-all group"
           >
             <!-- Project Image -->
-            <div v-if="project.image" class="mb-4 rounded-lg overflow-hidden">
+            <div v-if="project.image" class="rounded-t-xl overflow-hidden">
               <img 
                 :src="project.image" 
                 :alt="project.name"
@@ -135,39 +150,54 @@ const professionalProjects = [
               />
             </div>
             
-            <!-- Project Header -->
-            <div class="flex items-start justify-between gap-3 mb-2">
-              <h4 class="text-base sm:text-lg font-semibold text-white group-hover:text-white/90 transition-colors">
-                {{ project.name }}
-              </h4>
-              <a
-                v-if="project.url && project.url !== '#'"
-                :href="project.url"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="shrink-0 mt-0.5"
-              >
-                <ExternalLink class="h-4 w-4 sm:h-5 sm:w-5 text-white/60 group-hover:text-white/80" />
-              </a>
-            </div>
+            <CardHeader>
+              <div class="flex items-start justify-between gap-3">
+                <CardTitle>
+                  {{ project.name }}
+                </CardTitle>
+                <a
+                  v-if="project.url && project.url !== '#'"
+                  :href="project.url"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="shrink-0 mt-0.5"
+                >
+                  <ExternalLink class="h-4 w-4 sm:h-5 sm:w-5" />
+                </a>
+              </div>
+            </CardHeader>
             
-            <!-- Project Description -->
-            <p class="text-xs sm:text-sm text-white/70 leading-relaxed mb-3">
-              {{ project.description }}
-            </p>
-            
-            <!-- Technologies Badges -->
-            <div v-if="project.technologies && project.technologies.length > 0" class="flex flex-wrap gap-2">
-              <Badge
-                v-for="tech in project.technologies"
-                :key="tech"
-                variant="outline"
-                class="text-xs font-mono text-white/80 bg-white/5 border-white/15"
-              >
-                {{ tech }}
-              </Badge>
-            </div>
-          </div>
+            <CardContent>
+              <!-- Project Description -->
+              <p class="text-xs sm:text-sm leading-relaxed mb-3">
+                {{ project.description }}
+              </p>
+              
+              <!-- Features List -->
+              <div v-if="project.features && project.features.length > 0" class="mb-3">
+                <ul class="space-y-2">
+                  <li
+                    v-for="(feature, index) in project.features"
+                    :key="index"
+                    class="text-xs sm:text-sm leading-relaxed flex items-start gap-2"
+                  >
+                    <span class="mt-1.5 shrink-0">•</span>
+                    <span>{{ feature }}</span>
+                  </li>
+                </ul>
+              </div>
+              
+              <!-- Technologies Badges -->
+              <div v-if="project.technologies && project.technologies.length > 0" class="flex flex-wrap gap-2">
+                <Badge
+                  v-for="tech in project.technologies"
+                  :key="tech"
+                >
+                  {{ tech }}
+                </Badge>
+              </div>
+            </CardContent>
+          </Card>
         </div>
       </div>
 
@@ -183,27 +213,41 @@ const professionalProjects = [
             :href="project.url"
             target="_blank"
             rel="noopener noreferrer"
-            class="block p-4 sm:p-5 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 hover:border-white/20 transition-all group"
+            class="block"
           >
-            <div class="flex items-start justify-between gap-3 mb-2">
-              <h4 class="text-base sm:text-lg font-semibold text-white group-hover:text-white/90 transition-colors">
-                {{ project.name }}
-              </h4>
-              <ExternalLink class="h-4 w-4 sm:h-5 sm:w-5 text-white/60 group-hover:text-white/80 shrink-0 mt-0.5" />
-            </div>
-            <p class="text-xs sm:text-sm text-white/70 leading-relaxed mb-3">
-              {{ project.description }}
-            </p>
-            <div v-if="project.technologies.length > 0" class="flex flex-wrap gap-2">
-              <Badge
-                v-for="tech in project.technologies"
-                :key="tech"
-                variant="outline"
-                class="text-xs font-mono text-white/80 bg-white/5 border-white/15"
-              >
-                {{ tech }}
-              </Badge>
-            </div>
+            <Card>
+              <!-- Project Image -->
+              <div v-if="project.image" class="rounded-t-xl overflow-hidden">
+                <img 
+                  :src="project.image" 
+                  :alt="project.name"
+                  class="w-full h-auto object-cover"
+                />
+              </div>
+              
+              <CardHeader>
+                <div class="flex items-start justify-between gap-3">
+                  <CardTitle>
+                    {{ project.name }}
+                  </CardTitle>
+                  <ExternalLink class="h-4 w-4 sm:h-5 sm:w-5 shrink-0 mt-0.5" />
+                </div>
+              </CardHeader>
+              <CardContent>
+                <p class="text-xs sm:text-sm leading-relaxed mb-3">
+                  {{ project.description }}
+                </p>
+                <div v-if="project.technologies.length > 0" class="flex flex-wrap gap-2">
+                  <Badge
+                    v-for="tech in project.technologies"
+                    :key="tech"
+                    variant="outline"
+                  >
+                    {{ tech }}
+                  </Badge>
+                </div>
+              </CardContent>
+            </Card>
           </a>
         </div>
       </div>
