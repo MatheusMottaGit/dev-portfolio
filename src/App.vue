@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
-import { Github, Linkedin, Twitter, Mail, ExternalLink } from 'lucide-vue-next'
+import { Github, Linkedin, Twitter, Mail, Instagram, ExternalLink } from 'lucide-vue-next'
 
 const socialLinks = [
   {
@@ -18,6 +18,11 @@ const socialLinks = [
     name: 'Twitter',
     url: 'https://twitter.com/eu_o_mottta',
     icon: Twitter,
+  },
+  {
+    name: 'Instagram',
+    url: 'https://instagram.com/omotta.dev',
+    icon: Instagram,
   },
   {
     name: 'Gmail',
